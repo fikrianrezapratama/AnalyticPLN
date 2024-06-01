@@ -29,6 +29,7 @@ This is a simple Flask application for authentication and data fetching from an 
 
 ## Directory Structure
 
+```
 my_flask_app/
 │
 ├── app/
@@ -44,6 +45,7 @@ my_flask_app/
 ├── .env
 ├── run.py
 └── requirements.txt
+```
 
 ## Usage
 
