@@ -3,6 +3,7 @@ from codecs import encode
 import json
 import os
 import logging
+from app.cache import token_cache
 
 logger = logging.getLogger(__name__)
 
@@ -13,6 +14,11 @@ def login():
     Returns:
         dict: JSON response containing the authentication token if successful.
     """
+    cached_token = token_cache.get_token()
+    if cached_token:
+        logger.info('Using cached token')
+        return {"token": cached_token}
+    
     try:
         conn = http.client.HTTPSConnection(os.getenv('API_HOST'))
         dataList = []
@@ -41,7 +47,7 @@ def login():
         conn.close()
         logger.info('Login successful')
         return json.loads(data.decode("utf-8"))
-    
+        
     except Exception as e:
             logger.error(f'Login failed: {e}')
             return {}

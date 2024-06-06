@@ -1,4 +1,4 @@
-# My Flask App
+# Optical-Probe Data Analitycs
 
 This is a simple Flask application for authentication and data fetching from an external API.
 
@@ -15,9 +15,9 @@ This is a simple Flask application for authentication and data fetching from an 
 4. Create a `.env` file and add the following variables:
 
    ```
-   API_HOST=pln-probe.kopibub.uk
-   EMAIL=admin@gmail.com
-   PASSWORD=password
+   API_HOST=sample.com
+   EMAIL=sample@gmail.com
+   PASSWORD=sample_password
    LOG_LEVEL=DEBUG
    ```
 
@@ -35,6 +35,7 @@ my_flask_app/
 ├── app/
 │ ├── init.py
 │ ├── routes.py
+│ ├── cache.py
 │ ├── auth.py
 │ └── utils.py
 │
@@ -50,6 +51,7 @@ my_flask_app/
 ## Usage
 
 - `/get_data` - GET request to fetch data from the API.
+- **GET /get_data/<data_id>**: Fetch data from the API by ID.
 
 ## Logging
 
