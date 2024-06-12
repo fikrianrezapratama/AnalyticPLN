@@ -5,16 +5,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 def fetch_data(token):
-    """
-    Fetch data from the API using the provided token.
-
-    Args:
-        token (str): Authentication token.
-
-    Returns:
-        dict: JSON response containing the data if successful.
-        None: If the request failed.
-    """
     try:
         api_endpoint = f"https://{os.getenv('API_HOST')}/api/device"
         headers = {
