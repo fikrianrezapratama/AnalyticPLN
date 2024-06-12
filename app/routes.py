@@ -86,7 +86,7 @@ def data_pln():
         return jsonify({"error": "Failed to fetch data"}), 500
 
     # Log the fetched data to inspect its structure
-    logging.info(f"Fetched data: {data['data']}")
+    # logging.info(f"Fetched data: {data['data']}")
 
     processed_data = process_data(data)
 
@@ -95,7 +95,7 @@ def data_pln():
         return jsonify({"error": "Failed to process data"}), 500
 
     # Log the processed data to inspect its structure
-    logging.info(f"Processed data: {processed_data}")
+    # logging.info(f"Processed data: {processed_data}")
 
     combined_data = []
     for item in data['data']:
@@ -167,13 +167,13 @@ def data_pln_by_id(data_id):
 
     processed_data = process_data(data)
 
-    if data_id not in processed_data:
+    if str(data_id) not in processed_data:
         return jsonify({"error": f"No processed data found for ID {data_id}"}), 404
 
     fetched_item = data
-    processed_item = processed_data[str(data_id)]  # Ubah data_id menjadi string
+    processed_item = processed_data[str(data_id)]
 
-    response_data = {
+    combined_item = {
         "id": data_id,
         "user_id": fetched_item["user_id"],
         "latitude": fetched_item["latitude"],
@@ -207,6 +207,6 @@ def data_pln_by_id(data_id):
         "message": processed_item["Hasil Analisis"]["message"]
     }
 
+    response_data = {"data": combined_item}
     response_json = json.dumps(response_data, indent=2)
     return Response(response_json, mimetype='application/json')
-
