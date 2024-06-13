@@ -1,12 +1,13 @@
 import json
 import logging
 from flask import Blueprint, jsonify, Response
+from flask_cors import CORS
 from auth.auth import login
 from utils.api import fetch_data, fetch_data_by_id
 from utils.data_processing import process_data
 
-
 main = Blueprint('main', __name__)
+CORS(main)  # Enable CORS for the main blueprint
 
 @main.route('/get_data', methods=['GET'])
 def get_data():
