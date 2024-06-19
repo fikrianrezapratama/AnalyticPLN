@@ -24,14 +24,14 @@ def kriteria3(data):
 
 #LCD Rusak, Error, Blank
 def kriteria4(data):
-    if float(data["lcd_condition"]) == 1:
+    if float(data["lcd_condition"]) <= 3:
         return {"status": "Normal", "message": "LCD normal"}
     else:
         return {"status": "SO", "message": "LCD rusak"}
 
 #Keypad Rusak
 def kriteria5(data):
-    if float(data["keypad_condition"]) == 1: #belum ada data keypad
+    if float(data["keyped_condition"]) <= 3: #belum ada data keypad
         return {"status": "Normal", "message": "Keypad normal"}
     else:
         return {"status": "SO", "message": "Keypad rusak"}
@@ -53,7 +53,7 @@ def kriteria7(data):
 
 #Tutup terminal dibuka
 def kriteria8(data):
-    if float(data["terminal_covers_open"]) > 0:
+    if float(data["terminal_covers_open"]) > 2:
         return {"status": "SO", "message": "Tutup terminal pernah dibuka"}
     else:
         return {"status": "Normal", "message": "Tutup terminal tertutup"}
@@ -94,6 +94,17 @@ def kriteria12(data):
     # data 25 kwh_credit_tokens_received
     return data["Energi kWh kumulatif"] == 0 and data["Jumlah token kredit kWh diterima"] > 10
 
+#Kondisi Segel
+def kriteria13(data):
+    if float(data["seal_status"]) == 2:
+        return {"status": "Normal", "message": "Segel normal"}
+    
+    elif float(data["seal_status"]) == 1:
+        return {"status": "SO", "message": "Seal rusak"}
+    
+    else:
+        return {"status": "SO", "message": "Seal tidak ada"}
+
 #analisis_akhir
 def analisis_akhir(data):
     kriteria_list = [kriteria1, kriteria2, kriteria3, kriteria4, kriteria7, kriteria8, kriteria9, kriteria10]
@@ -105,6 +116,6 @@ def analisis_akhir(data):
             messages.append(hasil["message"])
     
     if messages:
-        return {"status": "SO", "message": f"Karena: {', '.join(messages)}"}
+        return {"status": "SO", "message": f"{', '.join(messages)}"}
     
     return {"status": "Normal", "message": "Semua parameter normal"}
