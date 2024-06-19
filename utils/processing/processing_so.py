@@ -46,7 +46,7 @@ def kriteria6(data):
 
 #Frekuensi input CT yang tinggi
 def kriteria7(data):
-    if float(data["technical_tokens_received"]) > 1:
+    if float(data["technical_tokens_received"]) > 7:
         return {"status": "SO", "message": "Frekuensi input CT yang tinggi"}
     else:
         return {"status": "Normal", "message": "Frekuensi input CT normal"}
